@@ -1,0 +1,60 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Karol",
+      "lastName": "Żywiec",
+      "email": "zywiec@gmail.com",
+      "password": "zywiec123"
+    },
+    {
+      "id": "2",
+      "name": "Tadeusz",
+      "lastName": "Tatra",
+      "email": "tatra@gmail.com",
+      "password": "tartal23"
+    },
+    {
+      "id": "3",
+      "name": "Mateusz",
+      "lastName": "Harnaś",
+      "email": "harnas@gmail.com",
+      "password": "harnas123"
+    },
+    {
+      "id": "4",
+      "name": "Rafał",
+      "lastName": "Porter",
+      "email": "porter@gmail.com",
+      "password": "porter123"
+    },
+    {
+      "id": "5",
+      "name": "Dawid",
+      "lastName": "Perła",
+      "email": "perla@gmail.com",
+      "password": "perla123"
+    },
+    {
+      "id": "6",
+      "name": "Konrad",
+      "lastName": "Warka",
+      "email": "warka@gmail.com",
+      "password": "warka123"
+    },
+    {
+      "name": "Łukasz",
+      "lastName": "Szafran",
+      "email": "szafran@interia.pl",
+      "password": "kjhgfdfgh",
+      "id": "yZCWGSj"
+    },
+    {
+      "name": "Łukasz",
+      "lastName": "Szafran",
+      "email": "szafran@interia.pl",
+      "password": "kjhgfdfgh",
+      "id": "uSfyiv9"
+    }
+  ]
+}
