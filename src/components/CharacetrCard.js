@@ -12,13 +12,16 @@ import { makeStyles } from "@material-ui/styles";
 
 const CharacterCard = ({ id, name, status, species, image }) => {
   const classes = useStyles();
+
   return (
     <Container>
       <Link className={classes.link} to={`/character/${name}/${id}`}>
         <Card className={classes.root}>
           <CardActionArea>
             <CardHeader
-              avatar={<Avatar sx={{ bgcolor: "#92a8d1" }}>{name[0]}</Avatar>}
+              avatar={
+                <Avatar sx={{ bgcolor: "#92a8d1" }}>{id.toString()}</Avatar>
+              }
             />
             <CardMedia
               component="img"
@@ -51,7 +54,7 @@ const useStyles = makeStyles({
     maxeHight: 370,
     minHeight: 370,
     margin: 20,
-    border: "3px solid #87bdd8",
+    border: "4px solid #87bdd8",
   },
   link: {
     textDecoration: "none",
@@ -67,6 +70,7 @@ const Container = styled.div`
   flex-direction: column;
   background-position: center;
   background-size: cover;
+  padding-top: 5%;
 `;
 
 export default CharacterCard;

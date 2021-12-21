@@ -1,36 +1,78 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import ThemePhoto from "../images/cosmosR&M.jpg";
 import CharacterCard from "./CharacetrCard";
+import FilterNavBarCharacters from "./FilterNavBarCharacters";
 
 const CharactersList = () => {
-  const [characters, setCharacters] = useState(null);
+  const [characters, setCharacters] = useState([]);
+  const [page, setPage] = useState(1);
+  const [pageData, setPageData] = useState([]);
+  const [selectStatusFilter, setSelectStatusFilter] = useState("");
 
   useEffect(() => {
-    axios.get("https://rickandmortyapi.com/api/character/").then((result) => {
-      console.log(result.data);
-      setCharacters(result.data.results);
-    });
-  }, []);
-
+    axios
+      .get(
+        `https://rickandmortyapi.com/api/character/?page=${page}&status=${selectStatusFilter}`
+      )
+      .then((results) => {
+        setCharacters(results.data.results);
+        setPageData(results.data.info);
+      });
+  }, [page, selectStatusFilter]);
+  console.log(pageData);
   if (!characters) {
     return "Brak danych";
   }
 
+  const handleChangePrevPage = () => {
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  };
+
+  const handleChangeNextPage = () => {
+    if (pageData.next !== null) {
+      setPage(page + 1);
+    } else if (pageData.next === null) {
+      setPage(pageData.pages.toString());
+    }
+  };
+
+
+    const handleSelectStatus = (statusFilter) => {
+      setPage(page)
+      setSelectStatusFilter(statusFilter);
+    }
+  
+
   return (
-    <Container>
-      {characters.map(({ id, name, status, species, image }) => (
-        <CharacterCard
-          key={id}
-          id={id}
-          name={name}
-          status={status}
-          species={species}
-          image={image}
-        />
-      ))}
-    </Container>
+    <>
+      <Container>
+        <FilterNavBarCharacters
+          pageData={pageData}
+          page={page}
+          nextPage={handleChangeNextPage}
+          prevPage={handleChangePrevPage}
+          handleSelectStatus={handleSelectStatus}
+          selectStatusFilter={selectStatusFilter}
+        ></FilterNavBarCharacters>
+        {characters.map(
+          ({ id, name, status, species, image, result, page }) => (
+            <CharacterCard
+              key={id}
+              id={id}
+              name={name}
+              status={status}
+              species={species}
+              image={image}
+              result={result}
+              page={page}
+            />
+          )
+        )}
+      </Container>
+    </>
   );
 };
 
@@ -38,13 +80,12 @@ export default CharactersList;
 
 const Container = styled.div`
   display: flex;
-  /* flex-direction: column; */
   flex-wrap: wrap;
   justify-content: center;
-  background-image: url(${ThemePhoto});
+  background-color: #454140;
   background-position: center;
-  background-size: cover;
+  background-size: 100%;
   width: 100%;
-  height: auto;
-  padding-top: 100px;
+  min-height: 100vh;
+  padding-top: 45px;
 `;

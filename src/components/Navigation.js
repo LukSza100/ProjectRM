@@ -7,19 +7,13 @@ import styled from "styled-components";
 import { makeStyles } from "@material-ui/core";
 
 const Navigation = () => {
-  const useStyles = makeStyles({
-    navLink: {
-      textDecoration: "none",
-    },
-    active: {
-      backgroundColor: "#daebe8",
-    },
-  });
-
   const classes = useStyles();
-
   const buttons = naviButtons.map((button) => (
-    <NavLink className={classes.navLink} key={button.name} to={button.path}>
+    <NavLink
+      className={classes.navLink}
+      key={button.name}
+      to={button.path}
+    >
       <Button variant="contained" endIcon={button.icon}>
         {button.name}
       </Button>
@@ -36,11 +30,17 @@ const Navigation = () => {
   );
 };
 
+const useStyles = makeStyles({
+  navLink: {
+    textDecoration: "none",
+  },
+});
+
 const NavBar = styled.div`
   display: flex;
   flex-direction: row;
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   top: 0;
   padding-left: 5%;
   width: 95%;

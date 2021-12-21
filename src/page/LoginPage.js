@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import ThemePhoto from "../images/R&M2start.png";
@@ -96,6 +96,6 @@ const ButtonBox = styled.div`
   width: 10%;
   height: 25%;
   position: relative;
-  margin-left: 55%;
+  margin-left: 51%;
   margin-top: 30px;
 `;
