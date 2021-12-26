@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import ThemePhoto from "../images/R&M2start.png";
@@ -7,26 +7,32 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
 const LoginPage = () => {
-  const [form, setForm] = useState({
-    name: "",
-    lastName: "",
-    email: "",
-    password: "",
-  });
 
-  const inputValue = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
+  const [dataUser, setDataUser] = useState([]);
+    const [form, setForm] = useState({
+      name: "",
+      lastName: "",
+      email: "",
+      password: "",
     });
+
+    const inputValue = (e) => {
+      setForm({
+        ...form,
+        [e.target.name]: e.target.value,
+      });
+    };
+
+    const checkUser = () => {
+      axios
+        .get("http://localhost:3000/users")
+        .then((results) => setDataUser(results.data))
+      console.log(dataUser)
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post("http://localhost:3000/users", form)
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
+    checkUser();
   };
 
   return (

@@ -9,6 +9,7 @@ const CharactersList = () => {
   const [page, setPage] = useState(1);
   const [pageData, setPageData] = useState([]);
   const [selectStatusFilter, setSelectStatusFilter] = useState("");
+  const [switchStatusFilter, setSwitchStatusFilter] = useState(false);
 
   useEffect(() => {
     axios
@@ -20,7 +21,6 @@ const CharactersList = () => {
         setPageData(results.data.info);
       });
   }, [page, selectStatusFilter]);
-  console.log(pageData);
   if (!characters) {
     return "Brak danych";
   }
@@ -39,12 +39,20 @@ const CharactersList = () => {
     }
   };
 
+  const handleSelectStatus = (statusFilter) => {
+    setPage(1);
+    setSelectStatusFilter(statusFilter);
+    setSwitchStatusFilter(false);
+  };
 
-    const handleSelectStatus = (statusFilter) => {
-      setPage(page)
-      setSelectStatusFilter(statusFilter);
+  const handleSwitchStatus = () => {
+    setSwitchStatusFilter((sort) => !sort);
+    if (switchStatusFilter) {
+      characters.sort((a, b) => (a.name > b.name ? 1 : -1));
+    } else {
+      characters.sort((a, b) => (a.name < b.name ? 1 : -1));
     }
-  
+  };
 
   return (
     <>
@@ -56,6 +64,8 @@ const CharactersList = () => {
           prevPage={handleChangePrevPage}
           handleSelectStatus={handleSelectStatus}
           selectStatusFilter={selectStatusFilter}
+          handleSwitchStatus={handleSwitchStatus}
+          switchStatusFilter={switchStatusFilter}
         ></FilterNavBarCharacters>
         {characters.map(
           ({ id, name, status, species, image, result, page }) => (

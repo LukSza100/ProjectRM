@@ -11,6 +11,8 @@ const FilterNavBarCharacters = ({
   nextPage,
   handleSelectStatus,
   selectStatusFilter,
+  handleSwitchStatus,
+  switchStatusFilter,
 }) => {
   return (
     <FilterNavBar>
@@ -29,10 +31,10 @@ const FilterNavBarCharacters = ({
         />
       </SelectFilterBox>
       <SwitchFilterBox>
-        <h3>
-          A
-          <SwitchFilter />Z
-        </h3>
+          <SwitchFilter
+            handleSwitchStatus={handleSwitchStatus}
+            switchStatusFilter={switchStatusFilter}
+          />
       </SwitchFilterBox>
     </FilterNavBar>
   );

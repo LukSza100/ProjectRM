@@ -7,6 +7,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
 const RegistrationPage = () => {
+  const [downloadedEmail, setDownloadedEmail] = useState([]);
   const [form, setForm] = useState({
     name: "",
     lastName: "",
@@ -21,13 +22,27 @@ const RegistrationPage = () => {
     });
   };
 
+  const checkEmail = () => {
+    axios
+      .get("http://localhost:3000/users")
+      .then((results) => setDownloadedEmail(results.data));
+    const usersEmail = downloadedEmail.map((item) => item.email);
+    usersEmail.forEach(function (check) {
+      if (form.email === check) {
+        return alert("Wpisany adres email już istnieje");
+      }
+    });
+
+    axios
+      .post("http://localhost:3000/users", form)
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:3000/users', form)
-   .then((response) => console.log(response))
-   .catch(error=> console.log(error))
-    }
-
+    checkEmail();
+  };
 
   return (
     <RegistrationPageContain>
